@@ -1,9 +1,9 @@
 'use client';
-import { RiLogoutBoxLine } from "react-icons/ri";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useCallback, useState } from "react";
 import MenuItem from "./MenuItem";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
 const UserMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
     // e reverse ra nato ang current value sa setIsOpen
@@ -12,6 +12,7 @@ const UserMenu = () => {
     },[])
     //hook for registerModal 
     const registerModal = useRegisterModal();
+    const loginModal = useLoginModal();
     return(
         
         <div className="relative">
@@ -71,7 +72,7 @@ const UserMenu = () => {
                                 <div className=" flex flex-col cursor-pointer">
                                     <>
                                     <MenuItem
-                                    onClick = {() => {}}
+                                    onClick = {loginModal.onOpen}
                                     label = "Login"/>
                                     <MenuItem
                                     onClick = {registerModal.onOpen}

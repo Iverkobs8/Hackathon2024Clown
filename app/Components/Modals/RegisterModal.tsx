@@ -4,15 +4,23 @@ import {useCallback, useState} from "react";
 import axios from "axios";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Modal from "./Modal";
-import Heading from "../Heading";
 import InputContainer from "../inputs/InputContainer";
+import useLoginModal from "@/app/hooks/useLoginModal";
+import toast from "react-hot-toast";
+
 
 
 const RegisterModal = () => {
     //hook ig open nato sa registerModal
     const registerModal = useRegisterModal();
+    const loginModal = useLoginModal();
     // we will use this if nag load pa atoang page or api connection
     const [isLoading, setIsLoading] = useState(false);
+
+const onToggleLogin = useCallback(() =>{
+    registerModal.onClose();
+    loginModal.onOpen();
+},[registerModal, loginModal])
 
     //Form control
     const{
@@ -23,6 +31,7 @@ const RegisterModal = () => {
         }
     } = useForm<FieldValues>({
         defaultValues: {
+            email : '',
             firstname: '',
             lastname: '',
             contactnumber: '',
@@ -40,7 +49,7 @@ const RegisterModal = () => {
             registerModal.onClose();
         })
         .catch((error) =>{
-            console.log(error);
+            toast.error('Something went wrong.');
         })
         .finally(() => {
             setIsLoading(false);
@@ -49,9 +58,13 @@ const RegisterModal = () => {
 
     const bodyContent = (
         <div className="flex flex-col gap-4">
-            <Heading 
-            title = "Welcome to Tech Barney"
-            subtitle="Create an account"
+            <InputContainer
+            id="email"
+            label="Email"
+            disabled ={isLoading}
+            register={register}
+            errors={errors}
+            required
             />
             <InputContainer
             id="firstname"
@@ -97,11 +110,11 @@ const RegisterModal = () => {
     );
     const footerContent = (
         <div className="flex flex-col gap-2 p-6">
-          <div className="flex flex-row items-center gap-2 justify-center">
+          <div className="flex flex-row items-center gap-2 justify-center text-white">
             <div>Already have an account?</div>
             <div
-              onClick={() => {}}
-              className="text-neutral-800 cursor-pointer hover:underline"
+              onClick={onToggleLogin}
+              className="text-white cursor-pointer hover:underline"
             >
               Log in
             </div>
@@ -115,7 +128,7 @@ const RegisterModal = () => {
         disabled = {isLoading}
         isOpen = {registerModal.isOpen}
         title = "Sign up"
-        actionLabel="Continue"
+        actionLabel="SIGN UP"
         onClose={registerModal.onClose}
         onSubmit={handleSubmit(onSubmit)}
         body={bodyContent}

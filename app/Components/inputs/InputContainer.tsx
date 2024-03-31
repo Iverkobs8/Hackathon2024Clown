@@ -31,7 +31,7 @@ const InputContainer: React.FC<InputProps> = ({
             type={type}
             className={`peer
                         w-full
-                        pt-6
+                        py-4 px-3 
                         font-light
                         bg-white
                         border-2

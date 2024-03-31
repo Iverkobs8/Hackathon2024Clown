@@ -68,18 +68,17 @@ const Modal: React.FC<ModalProps> = (
 
     return(
     <>
-    <div className="justify-center
-                    items-center
-                    flex
-                    overflow-x-hidden
-                    overflow-y-hidden
-                    fixed
-                    inset-0
-                    z-50
-                    outline-none
-                    focus:outline-none
-                    bg-neutral-800/70"
-                    >
+ <div className="justify-center
+                items-center
+                flex
+                overflow-x-hidden
+                overflow-y-hidden
+                fixed
+                inset-0
+                z-50
+                outline-none
+                focus:outline-none
+                bg-gray-900 bg-opacity-40">
 {/*Screen size*/}
 <div className="relative w-full md:w-3/4 lg:w-2/3 xl:w-1/2 my-6 mx-auto max-h-full max-w-lg">
 {/*Content */}
@@ -97,24 +96,24 @@ const Modal: React.FC<ModalProps> = (
                             lg:h-auto
                             md:h-auto
                             border-0
-                            rounded-lg
+                            rounded-3xl
                             shadow-lg
                             relative
                             flex
                             flex-col
                             w-full
-                            bg-white
+                           
                             outline-none
                             focus:outline-none
-            ">
+            " style={{ backgroundColor: '#31363F' }}>
                 {/*HEADER */}
                 <div className="flex
                                 items-center
-                                p-6
                                 rounded-t
+                                pt-5
                                 justify-center
                                 relative
-                                border-b-[1px]">
+                               ">
 
                     <button 
                             onClick ={handleClose}
@@ -125,11 +124,11 @@ const Modal: React.FC<ModalProps> = (
                                         absolute
                                         right-9">
 
-                                        <IoMdClose size={18}/>               
+                                        <IoMdClose size={18} color="white"/>               
                     </button>
-                    <div className="text-lg font-semibold">
-                        {title}
-                    </div>
+                    <div className="text-3xl font-bold font-inter text-white">
+    {title}
+</div>
                 </div>
             {/**Body */}
             <div className="relative
@@ -143,7 +142,8 @@ const Modal: React.FC<ModalProps> = (
                             flex-row
                             items-center
                             gap-2
-                            w-full">
+                            w-full"
+                            >
             {secondaryAction && secondaryActionLabel && (
                     <Button
                     outline
