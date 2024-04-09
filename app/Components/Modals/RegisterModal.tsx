@@ -42,7 +42,7 @@ const onToggleLogin = useCallback(() =>{
     //Function nato og mag submit nata og data
     const onSubmit : SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true);
-
+        console.log(data);
         //POST a data
         axios.post('/api/register', data)
         .then(() => {

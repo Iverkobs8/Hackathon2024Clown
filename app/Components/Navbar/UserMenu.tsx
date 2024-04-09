@@ -4,7 +4,17 @@ import { useCallback, useState } from "react";
 import MenuItem from "./MenuItem";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
-const UserMenu = () => {
+import { signOut } from "next-auth/react";
+import { SafeUser } from "@/app/types";
+
+interface UserMenuProps{
+    currentUser?: SafeUser | null
+}
+
+
+const UserMenu: React.FC<UserMenuProps>= ({
+    currentUser
+}) => {
     const [isOpen, setIsOpen] = useState(false);
     // e reverse ra nato ang current value sa setIsOpen
     const toggleOpen = useCallback(() => {
@@ -49,7 +59,15 @@ const UserMenu = () => {
                             hover:bg-[#76abae]
                             transition
                             "
-                            >  Tech Barney
+                            >  {currentUser ? (
+                                <>
+                                <div className="text-bold">Hi! {currentUser.firstname}</div>
+                                </>
+                            ):(
+                                <>
+                                Tech Barney
+                                </>
+                            )}
                              <AiOutlineMenu
                              color="white"
                               size={15}
@@ -70,6 +88,20 @@ const UserMenu = () => {
                             text-sm"
                             >
                                 <div className=" flex flex-col cursor-pointer">
+                                    {currentUser ? (
+                                         <>
+                                         <MenuItem
+                                         onClick = {() => {}}
+                                         label = "Sample"/>
+                                         <MenuItem
+                                          onClick = {() => {}}
+                                         label = "Sample"/>
+                                         <hr/>
+                                        <MenuItem
+                                          onClick = {() => signOut()}
+                                         label = "Logout"/>
+                                         </>
+                                    ):(
                                     <>
                                     <MenuItem
                                     onClick = {loginModal.onOpen}
@@ -78,8 +110,11 @@ const UserMenu = () => {
                                     onClick = {registerModal.onOpen}
                                     label = "Signup "/>
                                     </>
+                                    )}
                                     
                                 </div>
+                                
+                                
             </div>
         )}
     </div>

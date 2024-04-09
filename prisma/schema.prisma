@@ -16,9 +16,9 @@ datasource db {
 model User{
   id String @id @default(auto()) @map("_id") @db.ObjectId
   email String? @unique
-  firstName String
-  LastName String
-  ContactNumber String?
+  firstname String
+  lastname String
+  contactnumber String?
   emailVerified DateTime?
   hashedPassword String?
   createdAt DateTime @default(now())
