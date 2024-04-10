@@ -7,6 +7,9 @@ import Modal from "./Modal";
 import InputContainer from "../inputs/InputContainer";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import toast from "react-hot-toast";
+import Button from "../Button";
+import { FcGoogle } from "react-icons/fc";
+import { signIn } from "next-auth/react";
 
 
 
@@ -109,26 +112,37 @@ const onToggleLogin = useCallback(() =>{
         </div>
     );
     const footerContent = (
-        <div className="flex flex-col gap-2 p-6">
-          <div className="flex flex-row items-center gap-2 justify-center text-white">
-            <div>Already have an account?</div>
-            <div
-              onClick={onToggleLogin}
-              className="text-white cursor-pointer hover:underline"
-            >
-              Log in
+        <div className="flex flex-col gap-4 items-center">
+        <hr/>
+        <Button 
+            outline
+            label="Continue with Google"
+            icon={FcGoogle}
+            onClick={() => signIn('google')}
+        />
+    
+        <div className="text-neutral-500 text-center mt-4 font-light">
+            <div className="flex flex-row items-center justify-center gap-2">
+                <div>Already have an account?</div>
+                <div 
+                    onClick={onToggleLogin}
+                    className="text-white cursor-pointer hover:underline"
+                >
+                    Log in
+                </div>
             </div>
-          </div>
         </div>
-      );
+    </div>
+    
+        );
 
 
     return(
         <Modal
         disabled = {isLoading}
         isOpen = {registerModal.isOpen}
-        title = "Sign up"
-        actionLabel="SIGN UP"
+        title = "Create you account"
+        actionLabel="Continue"
         onClose={registerModal.onClose}
         onSubmit={handleSubmit(onSubmit)}
         body={bodyContent}

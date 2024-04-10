@@ -9,6 +9,9 @@ import useRegisterModal from '@/app/hooks/useRegisterModal';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { SafeUser } from '@/app/types';
+import { FcGoogle } from 'react-icons/fc';
+import Button from '../Button';
 
 const LoginModal = () => {
     const router = useRouter();
@@ -84,18 +87,29 @@ const LoginModal = () => {
         </div>
     );
     const footerContent = (
-        <div className="flex flex-col gap-2 p-6">
-          <div className="flex flex-row items-center gap-2 justify-center text-white">
-            <div>Dont have an account?</div>
-            <div
-              onClick={onToggleSignUp}
-              className="text-white cursor-pointer hover:underline"
-            >
-              Sign Up
+        <div className="flex flex-col gap-4 items-center">
+        <hr/>
+        <Button 
+            outline
+            label="Continue with Google"
+            icon={FcGoogle}
+            onClick={() => signIn('google')}
+        />
+    
+        <div className="text-neutral-500 text-center mt-4 font-light">
+            <div className="flex flex-row items-center justify-center gap-2">
+                <div>Already have an account?</div>
+                <div 
+                    onClick={onToggleSignUp}
+                    className="text-white cursor-pointer hover:underline"
+                >
+                    Sign Up
+                </div>
             </div>
-          </div>
         </div>
-      );
+    </div>
+    
+        );
 
   
     return(
@@ -112,3 +126,5 @@ footer = {footerContent}/>
     
 }
 export default LoginModal;
+
+

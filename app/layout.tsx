@@ -8,6 +8,7 @@ import RegisterModal from "./Components/Modals/RegisterModal";
 import LoginModal from "./Components/Modals/LoginModal";
 import ToasterProvider from "./Providers/ToasterProvider";
 import getCurrentUser from "./actions/getCurrentUser";
+import UploadImageModal from "./Components/Modals/UploadImageModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,14 +30,15 @@ export default async function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <ClientOnly>
-        <ToasterProvider />
-        <RegisterModal/>
-        <LoginModal/>
-        <Navbar currentUser = {currentUser}/>
+          <ToasterProvider />
+          <RegisterModal/>
+          {/* Conditionally render LoginModal */}
+          {!currentUser && <LoginModal/>}
+          <UploadImageModal />
+          <Navbar currentUser={currentUser}/>
         </ClientOnly>
-        {children}</body>
-
-
+        {children}
+      </body>
     </html>
   );
 }

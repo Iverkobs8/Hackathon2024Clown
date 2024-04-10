@@ -6,6 +6,9 @@ import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
+import useUploadImageModal from "@/app/hooks/useUploadImageModal";
+import { TbPhotoPlus } from 'react-icons/tb'
+
 
 interface UserMenuProps{
     currentUser?: SafeUser | null
@@ -23,42 +26,33 @@ const UserMenu: React.FC<UserMenuProps>= ({
     //hook for registerModal 
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
+    const uploadImageModal = useUploadImageModal();
     return(
         
         <div className="relative">
         <div className="flex flex-row items-center gap-3">
-            <div
-            onClick={() => {}}
-             className="hidden
-                            md:flex
-                            items-center
-                            text-sm
-                            font-semibold
-                            py-3
-                            px-4
-                            rounded-full
-                          hover:bg-[#76abae]
-                          text-white transition 
-                            text-color-white
-                            cursor-pointer">
-            </div>
+        <div
+  onClick={() => currentUser ? uploadImageModal.onOpen() : loginModal.onOpen()}
+  className="
+    hidden
+    md:flex
+    items-center
+    text-sm
+    font-semibold
+    py-3
+    px-4
+    rounded-full
+    hover:bg-[#76abae]
+    text-white
+    transition
+    text-color-white
+    cursor-pointer"
+>
+  <TbPhotoPlus size={30} color="white" />
+</div>
             <div
              onClick={toggleOpen}
-                 className="p-4
-                            md:py-1
-                            md:px-2
-                            border-[1px]
-                            border-neutral-200
-                            text-white
-                            flex
-                            flex-row
-                            items-center
-                            gap-3
-                            rounded-full
-                            cursor-pointer
-                            hover:bg-[#76abae]
-                            transition
-                            "
+                 className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 bg-white text-black flex flex-row items-center gap-3 rounded-full cursor-pointer hover:bg-[#76abae] transition"
                             >  {currentUser ? (
                                 <>
                                 <div className="text-bold">Hi! {currentUser.firstname}</div>
@@ -69,7 +63,7 @@ const UserMenu: React.FC<UserMenuProps>= ({
                                 </>
                             )}
                              <AiOutlineMenu
-                             color="white"
+                             color="Black"
                               size={15}
                              />        
             </div>
